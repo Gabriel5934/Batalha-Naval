@@ -30,13 +30,6 @@ def getPos():
     xAxis = int(input("Digite a cordenada X: "))
     yAxis = int(input("Digite a cordenada Y: "))
 
-def lineRadar():
-    yAxis, xAxis = 0, 0
-    yAxis += -1
-    for i in range(0, 3):
-        if botBoard[xAxis + i][yAxis] in icons:
-            found.append(botBoard[xAxis + i][yAxis])
-
 # Tela inicial
 print('''
 .______        ___      .___________.     ___       __       __    __       ___         .__   __.      ___      ____    ____      ___       __      
@@ -222,16 +215,18 @@ while validation == False:
         validation = True
 
 # Iniciando o ataque
-if validation == True:
-    if weapon == 1:
-        xAxis += -2
-        for i in range(0, 3):
-            lineRadar()
-            yAxis += 1
-        hittedBoats = len(list(set(found)))
-        print(hittedBoats)
 
-                
+    # Jogando X e Y para o canto do 3x3 e convertendo X e Y para "arrays start at 0"
+    yAxis += -2
+    xAxis += -2
+
+    # Varrendo a área de 3x3 em busca de embarcações
+    for i in (0, 3):
+        for i in range (0, 3):
+            if botBoard[xAxis + i][yAxis] in icons:
+                found.append(playerBoard[xAxis + i][yAxis])
+        yAxis += i
+    print(found)
 
 
 
